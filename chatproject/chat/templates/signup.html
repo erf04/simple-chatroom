@@ -20,7 +20,7 @@
     {% if messages %}
   <div class="messages">
       {% for message in messages %}
-          <div class="alert alert-danger">
+          <div class="alert alert-warning">
               {{ message }}
           </div>
       {% endfor %}
@@ -31,7 +31,7 @@
         <hr>
         <form action="" method="post">
             {% csrf_token %}
-            {{form.as_p}}
+            {{form}}
             <input type="submit" value="Signup" class="btn btn-primary">
         </form>
     </div>

@@ -16,6 +16,8 @@
       rel="stylesheet"
       href="{% static 'style.css' %}"
     />
+    <script src="https://code.jquery.com/jquery-3.7.1.js" 
+    integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
   </head>
   <body>
     <div class="mt-4 m-auto p-0 w-50 h-90 container">
@@ -199,13 +201,15 @@
             console.log(data);
               for(let i=data["message"].length-1;i>=0;i--){
               content=data["message"][i]
-              create_chat(content)
+              create_chat(content);
+              scroll(0);
              // document.querySelector('#chat-log').innerHTML += (content + '\n');
               }
           }
           else{
               //console.log(data["message"]);
               create_chat(data["message"]);
+              scroll("slow");
               //document.querySelector('#chat-log').innerHTML += (data["message"]["content"] + '\n');
           }
       };
@@ -258,8 +262,23 @@
           data_div.classList.add("person2");
           name.style.fontWeight = "bold";
         }
-        document.getElementById("chat-log").appendChild(data_div)
+        document.getElementById("chat-log").appendChild(data_div);
       }
+      
+
+
+
+      function scroll(speed){
+          var ht = 0;
+          $("#chat-log div").each(function() {
+            ht += $(this).height();
+          });
+          //console.log(ht);
+          $("#chat-log").animate({scrollTop: ht},speed);
+      }
+
+
+
 
       chatSocket.onclose = function(e) {
           console.error('Chat socket closed unexpectedly');

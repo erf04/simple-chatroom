@@ -7,6 +7,7 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from .models import Chat,Message
 from .forms import SignupForm
+from django.contrib.auth.forms import UserCreationForm
 # Create your views here.
 
 @login_required(login_url='login')
@@ -63,15 +64,16 @@ def logout(request):
 
 def signup(request :HttpRequest):
     if request.method=="POST":
-        form=SignupForm(request.POST)
+        form=UserCreationForm(request.POST)
         if form.is_valid():
             form.save()
             messages.success(request,"you signed up successfully")
-            return redirect('index')
+            messages.success(request,"use your username and password to login now")
+            return redirect('login')
         else:
             messages.error(request,"there is something wrong!")
         
-    form=SignupForm()
+    form=UserCreationForm()
     return render(request,"signup.html",{
         "form":form,
     })
