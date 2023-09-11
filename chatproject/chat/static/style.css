@@ -1,0 +1,162 @@
+body {
+    width: 100%;
+    background-color: rgb(255, 0, 166);
+}
+
+#container:hover {
+    box-shadow: -5px 5px 10px rgb(132, 132, 132);
+    transition: 0.2s;
+}
+
+#emoji-list {
+    display: none;
+}
+
+#emoji {
+    background-color: #555;
+    padding: 0px 0px 0px 5px;
+    height: 40px;
+}
+
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: none;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
+
+::-webkit-scrollbar-corner {
+    background: none;
+}
+
+.dropup-content {
+    border-radius: 10px;
+    padding: 5px;
+    margin-bottom: 40px;
+    position: absolute;
+    bottom: 50px;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+}
+
+ul {
+    padding: 0;
+    display: flex;
+    list-style: none;
+}
+
+p {
+    cursor: pointer;
+}
+
+.dropup:hover {
+    opacity: 1;
+    visibility: visible;
+    bottom: 100%;
+    width: 100%;
+    transition: 0.5s;
+}
+
+#chat-log {
+    height: 500px;
+    overflow-y: scroll;
+}
+
+#chat-log .person1 {
+    align-items: start;
+    justify-content: start;
+}
+
+.name {
+    color: rgb(100, 237, 102);
+    font-weight: bold;
+}
+
+.person1 {
+    width: fit-content;
+    margin-top: 10px;
+    padding: 5px;
+    background-color: white;
+    border: none;
+    border-radius: 12px;
+}
+
+.person2 {
+    width: fit-content;
+    margin-top: 10px;
+    padding: 5px;
+    color: aqua;
+    background-color: black;
+    border: none;
+    border-radius: 12px;
+}
+
+#footer {
+    height: 8%;
+    border-radius: 0px 0px 20px 20px;
+}
+
+#chat-message-input {
+    background-color: #888;
+    border-radius: 12px;
+}
+
+#chat-message-submit,
+#footer,
+#attachment-btn {
+    background-color: #555;
+}
+
+#emoji-sagi,
+#send-sagi,
+#attachment {
+    text-align: center;
+}
+
+#file-btn {
+    height: 25px;
+    width: 25px;
+    margin-bottom: 5px;
+}
+
+input[type="file"] {
+    display: none;
+}
+
+label {
+    cursor: pointer;
+}
+
+li {
+    padding: 0;
+}
+
+.h-90 {
+    height: 90%;
+}
+
+.h-80 {
+    height: 80%;
+}
+
+.h-11 {
+    height: 11%;
+}
+
+.h-72 {
+    height: 72%;
+}
+
+.h-14 {
+    height: 14%;
+}
