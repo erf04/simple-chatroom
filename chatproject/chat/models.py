@@ -21,4 +21,4 @@ class Message(models.Model):
         return self.author.username
     
     def message_order(self ,roomname):
-        return Message.objects.filter(related_chat__roomname=roomname).order_by("-timestamp")
+        return Message.objects.filter(related_chat__roomname=roomname)

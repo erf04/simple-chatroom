@@ -1,11 +1,5 @@
-
-//var sagi = document.querySelector("#chat-log");
-//sagi.scrollTop = sagi.scrollHeight;
-
-
-
 var message = document.getElementById("chat-message-input");
-var emoji = document.getElementsByTagName("p");
+var emoji = document.getElementsByTagName("a");
 
 function addEmoji(num) {
   message.value += emoji[num].innerHTML;

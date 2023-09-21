@@ -7,7 +7,6 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from .models import Chat,Message
 from .forms import SignupForm
-from django.contrib.auth.forms import UserCreationForm
 # Create your views here.
 
 @login_required(login_url='login')
@@ -31,12 +30,12 @@ def room(request,room_name):
         chat.members.add(username)
     else:
         chat_model[0].members.add(username)
-    messages=Message.objects.filter(related_chat=chat_model[0])
+
+
     print("username" +':' +str(username))
     return render(request,"chat/room.html",{
         "room_name":room_name,
         "username":mark_safe(json.dumps(username.username)),
-        "messages":messages
     })
 
 def login(request :HttpRequest):
@@ -44,7 +43,6 @@ def login(request :HttpRequest):
         username=request.POST["username"]
         password=request.POST["password"]
         user=authenticate(request,username=username,password=password)
-        print(user)
         if user is not None:
             login_user(request,user)
             messages.success(request,"you logged in successfully")
@@ -64,25 +62,15 @@ def logout(request):
 
 def signup(request :HttpRequest):
     if request.method=="POST":
-        form=UserCreationForm(request.POST)
+        form=SignupForm(request.POST)
         if form.is_valid():
             form.save()
             messages.success(request,"you signed up successfully")
-            messages.success(request,"use your username and password to login now")
-            return redirect('login')
+            return redirect('index')
         else:
             messages.error(request,"there is something wrong!")
         
-    form=UserCreationForm()
+    form=SignupForm()
     return render(request,"signup.html",{
         "form":form,
     })
-
-
-@login_required(login_url="login")
-def delete_message(request :HttpRequest,id):
-    message=Message.objects.get(pk=id)
-    message.delete()
-    chat=message.related_chat
-    return redirect("room",chat)
-

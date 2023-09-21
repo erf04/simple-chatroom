@@ -12,23 +12,19 @@
       integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9"
       crossorigin="anonymous"
     />
-    <link
-      rel="stylesheet"
-      href="{% static 'style.css' %}"
-    />
-    <script src="https://code.jquery.com/jquery-3.7.1.js" 
-    integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="{% static 'style.css' %}" />
   </head>
   <body>
-    <div class="mt-4 m-auto p-0 w-50 h-90 container">
+    <div class="mt-4 m-auto p-0 w-50 container">
       <!-- container -->
       <div
-        class="container-fluid h-100 w-100 m-0 p-0 align-items-center justify-content-center rounded-4"
+        class="container-fluid w-100 m-0 p-0 align-items-center justify-content-center rounded-5"
         id="container"
       >
         <!-- header -->
         <div
-          class="row bg-light w-100 h-14 p-0 m-0 border align-items-center justify-content-center rounded-top-4"
+          class="row w-100 h-14 p-0 m-0 align-items-center justify-content-center rounded-top-4"
+          id="header"
         >
           <!-- back button -->
           <div class="col-auto ms-2" id="back-button">
@@ -51,9 +47,16 @@
           <!-- profile -->
           <div
             style="height: 60px; width: 60px"
-            class="col-auto rounded-circle border m-2"
+            class="col-auto rounded-circle m-2 p-0"
             id="profile"
-          ></div>
+          >
+            <img
+              style="width: 60px; height: 60px"
+              class="rounded-circle"
+              src="{% static 'unknown.jpg' %}"
+              id="img-prof"
+            />
+          </div>
           <!-- info -->
           <div class="col-auto p-0 me-auto" id="info">
             <div class="h3" id="name">name</div>
@@ -61,7 +64,7 @@
           </div>
           <!-- menu -->
           <div class="col-auto me-1" id="menu">
-            <button style="background-color: #f8d9fa" class="border-0 bg-light">
+            <button class="border-0 bg-light" id="menu-btn">
               <svg
                 xmlns="three-dots.svg"
                 width="16"
@@ -78,21 +81,19 @@
           </div>
         </div>
         <!-- chat part -->
-        <div class="bg-dark d-block p-2" id="chat-log">
-          
+        <div id="chat-sagi" oncontextmenu="return false;">
+          <!-- <div class="bg-dark d-block" id="chat-log"></div> -->
+          <div class="d-block" id="chat-log"></div>
         </div>
         <!-- footer -->
-        <div
-          class="row p-0 m-0 w-100 h-14 border align-items-center"
-          id="footer"
-        >
+        <div class="row p-0 m-0 w-100 h-14 align-items-center" id="footer">
           <!-- emoji -->
           <div class="col-1 p-0 m-0" id="emoji-sagi">
             <button
               onmouseenter="showEmoji()"
               onmouseleave="hideEmoji()"
               id="emoji"
-              class="border-0 m-0 rounded-5"
+              class="border-0 m-0 rounded-4"
             >
               <svg
                 xmlns="emoji-smile.svg"
@@ -111,22 +112,61 @@
             </button>
             <!-- emoji list -->
             <div
-              class="dropup-content ms-4 bg-opacity-75 p-0 bg-black"
+              class="dropup-content ms-4 bg-opacity-75 p-0 bg-light"
               id="emoji-list"
               onmouseenter="showEmoji()"
               onmouseleave="hideEmoji()"
             >
               <ul class="p-0">
-                <li><p onclick="addEmoji(0)">&#128525;</p></li>
-                <li><p onclick="addEmoji(1)">&#128512;</p></li>
-                <li><p onclick="addEmoji(2)">&#128515;</p></li>
-                <li><p onclick="addEmoji(3)">&#128516;</p></li>
-                <li><p onclick="addEmoji(4)">&#128513;</p></li>
-                <li><p onclick="addEmoji(5)">&#128518;</p></li>
-                <li><p onclick="addEmoji(6)">&#128517;</p></li>
-                <li><p onclick="addEmoji(7)">&#129315;</p></li>
-                <li><p onclick="addEmoji(8)">&#128514;</p></li>
-                <li><p onclick="addEmoji(9)">&#128578;</p></li>
+                <li><a onclick="addEmoji(0)">&#128525;</a></li>
+                <li><a onclick="addEmoji(1)">&#128512;</a></li>
+                <li><a onclick="addEmoji(2)">&#128515;</a></li>
+                <li><a onclick="addEmoji(3)">&#128516;</a></li>
+                <li><a onclick="addEmoji(4)">&#128513;</a></li>
+                <li><a onclick="addEmoji(5)">&#128518;</a></li>
+                <li><a onclick="addEmoji(6)">&#128517;</a></li>
+                <li><a onclick="addEmoji(7)">&#129315;</a></li>
+                <li><a onclick="addEmoji(8)">&#128514;</a></li>
+                <li><a onclick="addEmoji(9)">&#128578;</a></li>
+                <li><a onclick="addEmoji(10)">&#128579;</a></li>
+                <li><a onclick="addEmoji(11)">&#128521;</a></li>
+                <li><a onclick="addEmoji(12)">&#128522;</a></li>
+                <li><a onclick="addEmoji(13)">&#128519;</a></li>
+                <li><a onclick="addEmoji(14)">&#129392;</a></li>
+              </ul>
+              <ul>
+                <li><a onclick="addEmoji(15)">&#128525;</a></li>
+                <li><a onclick="addEmoji(16)">&#129321;</a></li>
+                <li><a onclick="addEmoji(17)">&#128536;</a></li>
+                <li><a onclick="addEmoji(18)">&#128535;</a></li>
+                <li><a onclick="addEmoji(19)">&#128538;</a></li>
+                <li><a onclick="addEmoji(20)">&#128537;</a></li>
+                <li><a onclick="addEmoji(21)">&#128523;</a></li>
+                <li><a onclick="addEmoji(22)">&#128539;</a></li>
+                <li><a onclick="addEmoji(23)">&#128540;</a></li>
+                <li><a onclick="addEmoji(24)">&#129322;</a></li>
+                <li><a onclick="addEmoji(25)">&#128541;</a></li>
+                <li><a onclick="addEmoji(26)">&#129297;</a></li>
+                <li><a onclick="addEmoji(27)">&#129303;</a></li>
+                <li><a onclick="addEmoji(28)">&#129325;</a></li>
+                <li><a onclick="addEmoji(29)">&#129323;</a></li>
+              </ul>
+              <ul>
+                <li><a onclick="addEmoji(30)">&#129300;</a></li>
+                <li><a onclick="addEmoji(31)">&#129296;</a></li>
+                <li><a onclick="addEmoji(32)">&#129320;</a></li>
+                <li><a onclick="addEmoji(33)">&#128528;</a></li>
+                <li><a onclick="addEmoji(34)">&#128529;</a></li>
+                <li><a onclick="addEmoji(35)">&#128566;</a></li>
+                <li><a onclick="addEmoji(36)">&#128527;</a></li>
+                <li><a onclick="addEmoji(37)">&#128530;</a></li>
+                <li><a onclick="addEmoji(38)">&#128580;</a></li>
+                <li><a onclick="addEmoji(39)">&#128556;</a></li>
+                <li><a onclick="addEmoji(40)">&#128524;</a></li>
+                <li><a onclick="addEmoji(41)">&#128532;</a></li>
+                <li><a onclick="addEmoji(42)">&#128554;</a></li>
+                <li><a onclick="addEmoji(43)">&#129316;</a></li>
+                <li><a onclick="addEmoji(44)">&#128564;</a></li>
               </ul>
             </div>
           </div>
@@ -141,8 +181,12 @@
           </div>
           <!-- attachment -->
           <div class="col-1 p-0 m-0" id="attachment">
-            <label>
-              <i class="fa fa-2x fa-camera" id="file-btn"></i>
+            <label class="w-26 h-26">
+              <i
+                class="fa fa-paperclip"
+                style="font-size: 30px"
+                id="file-btn"
+              ></i>
               <input type="file" />
             </label>
           </div>
@@ -172,10 +216,18 @@
       crossorigin="anonymous"
     ></script>
     <script src="{% static 'script.js' %}"></script>
-    <script src="{% static 'reconnecting-websocket.min.js' %}"></script>
     <script src="{% static '3a2eaf6206.js' %}"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="{% static 'reconnecting-websocket.min.js' %}"></script>
     {{ room_name|json_script:"room-name" }}
     <script>
+      var div = $('#chat-log');
+      var chat = document.getElementById("chat-log");
+      var chatSagi = document.getElementById("chat-sagi");
+      var Height = chat.clientHeight;
+
+
       const roomName = JSON.parse(document.getElementById('room-name').textContent);
       document.getElementById("name").innerHTML = roomName;
       var username={{ username }};
@@ -187,51 +239,54 @@
           + '/'
       );
 
-      chatSocket.onopen=function(e){
+      chatSocket.onopen = function(e) {
           chatSocket.send(JSON.stringify({
               "command":"fetch_message",
               "roomname":roomName
-          }
-          ));
-      }
+          }));
+        }
+
       chatSocket.onmessage = function(e) {
           const data = JSON.parse(e.data);
-          console.log( data);
-          if (data["command"]==="fetch_message"){
-            console.log(data);
-              for(let i=data["message"].length-1;i>=0;i--){
-              content=data["message"][i]
-              create_chat(content);
-              scroll(0);
-             // document.querySelector('#chat-log').innerHTML += (content + '\n');
-              }
-          }
-          else{
+          var messageNum = data["message"].length;
+          // console.log(data);
+          if (data["command"] === "fetch_message"){
+            // console.log(data);
+            for(let i =0 ; i <=data["message"].length-1; i++){
+              content = data["message"][i];
+              create_chat(content, messageNum);
+              // document.querySelector('#chat-log').innerHTML += (content + '\n');
+            }
+          } else {
               //console.log(data["message"]);
-              create_chat(data["message"]);
-              scroll("slow");
+              create_chat(data["message"], messageNum);
+              div.animate({scrollTop: Height * messageNum * 100}, 0);
               //document.querySelector('#chat-log').innerHTML += (data["message"]["content"] + '\n');
           }
       };
 
-      function create_chat(data) {
-        const id=data["id"]
-        const data_div = document.createElement("div");
-        data_div.addEventListener("click",function(){
-          window.location.pathname = '/chat/del_msg/' + id + '/';
-        });
-        const name = document.createElement("p");
+      var input = document.getElementById("chat-message-input");
+      function create_chat(data, messages) {
+        var data_div = document.createElement("div");
+        var name = document.createElement("p");
         name.classList.add("name");
-        const matn = document.createElement("p");
+        var matn = document.createElement("p");
         matn.classList.add("matn");
-        const date = document.createElement("p");
+        var date = document.createElement("p");
         date.classList.add("date");
         data_div.appendChild(name);
         data_div.appendChild(matn);
         data_div.appendChild(date);
+        name.style.cursor = "default";
+        matn.style.cursor = "text";
+        date.style.cursor = "default";
+        name.style.width = "fit-content";
+        matn.style.width = "fit-content";
         const author = data["__str__"];
-        data_div.style.height = "auto";
         name.innerHTML = author;
+        // div.animate({scrollTop: Height * messages * 100}, 20000);
+        div.animate({scrollTop: Height * (messages + 1) * 100}, 0);
+
         var time = "";
         for (let i = 11;;i++) {
           if (i === 16) {
@@ -239,6 +294,7 @@
           }
           time += data["timestamp"][i];
         }
+
         name.style.marginBottom = "7px";
         matn.style.marginBottom = "7px";
         matn.innerHTML = data["content"];
@@ -246,39 +302,27 @@
         date.style.margin = "0px";
         date.style.fontSize = "12px";
         date.innerHTML = time;
-        if (author ==username) {
+        data_div.style.maxWidth = "500px";
+        data_div.style.minWidth = "100px";
+        name.style.fontWeight = "bold";
+        if (author == username) {
           data_div.classList.add("person1");
-          name.style.fontWeight = "bold";
-          name.style.color = "green";
           data_div.style.marginLeft = "auto";
           matn.style.paddingLeft = "15px";
-          date.style.textAlign = "left";
           data_div.style.direction = "rtl";
-        }
-        else {
+          matn.style.direction = "ltr";
+          date.style.direction = "ltr";
+        } else {
+          data_div.classList.add("person2");
           matn.style.paddingRight = "15px";
           date.style.textAlign = "right";
-          name.style.color = "cornflowerblue";
-          data_div.classList.add("person2");
-          name.style.fontWeight = "bold";
         }
-        document.getElementById("chat-log").appendChild(data_div);
-      }
-      
-
-
-
-      function scroll(speed){
-          var ht = 0;
-          $("#chat-log div").each(function() {
-            ht += $(this).height();
-          });
-          //console.log(ht);
-          $("#chat-log").animate({scrollTop: ht},speed);
+        chat.appendChild(data_div)
       }
 
-
-
+      chatSagi.addEventListener("contextmenu", () => {
+        alert("horaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa!");
+      });
 
       chatSocket.onclose = function(e) {
           console.error('Chat socket closed unexpectedly');
@@ -286,12 +330,14 @@
 
       document.querySelector('#chat-message-input').focus();
       document.querySelector('#chat-message-input').onkeyup = function(e) {
-          if (e.key === 'Enter') {  // enter, return
+          if (e.key === 'Enter' && input.value !== "") {  // enter, return
               document.querySelector('#chat-message-submit').click();
+              // div.animate({scrollTop: Height * 80 * 100}, 0);
           }
-      };
+        };
 
       document.querySelector('#chat-message-submit').onclick = function(e) {
+        if (input.value !== "") {
           const messageInputDom = document.querySelector('#chat-message-input');
           const message = messageInputDom.value;
           chatSocket.send(JSON.stringify({
@@ -301,7 +347,31 @@
               "roomname":roomName
           }));
           messageInputDom.value = '';
+        }
       };
     </script>
   </body>
 </html>
+
+<!--
+Ideas & problems:
+  scroll missed a message
+  typing into input box (new line)
+  right click on a message and show setting:
+    copy text
+    reply
+    speak
+    delete
+    edit
+  dropdown on header:
+    search
+    clear chat
+    change color
+  sound when message recive (or send)
+  good coloring
+  dark mode (light mode)
+  add or change profile
+  number of members (instead of online or offline)
+  sent message time
+  attachment
+-->

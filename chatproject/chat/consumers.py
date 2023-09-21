@@ -17,34 +17,21 @@ class ChatConsumer(WebsocketConsumer):
         chat_model=Chat.objects.get(roomname=roomname)
         usermodel=user.objects.filter(username=username).first()
         messagemodel=Message.objects.create(author=usermodel ,content=message,related_chat=chat_model)
-       # print(f"id : {messagemodel.pk}")
         #print(messagemodel)
         result=self.message_serializer(messagemodel)
         print("result : "+str(result))
         answer=eval(result)
-        answer["id"]=messagemodel.pk
-        print(answer)
         
         self.send_to_chat_message(answer)
         
 
     def fetch_message(self,text_data):
-        print(f'textData : {text_data} ')
+        print(text_data)
         roomname=text_data["roomname"]
         instance=Message.message_order(self,roomname)
-        
         json_message=self.message_serializer(instance)
-        data_dict=eval(json_message) #to get rid of bitestring
-        
-        
-        ids = instance.values_list('id', flat=True)
-       
-        for i in range(len(data_dict)):
-            data_dict[i]["id"]=ids[i]
-
-        #print(data_dict)
         answer={
-            "message":data_dict, 
+            "message":eval(json_message), #to get rid of bitestring
             "command":"fetch_message"
         }
         self.chat_message(answer)
@@ -65,7 +52,7 @@ class ChatConsumer(WebsocketConsumer):
 
     def connect(self):
         self.room_name=self.scope["url_route"]["kwargs"]["room_name"]
-        print(f"scope : {self.scope['user']}")
+        print(self.scope["user"])
         self.room_group_name=f'chat_{self.room_name}'
 
         async_to_sync(self.channel_layer.group_add)(
@@ -89,7 +76,7 @@ class ChatConsumer(WebsocketConsumer):
         #message = text_data_dict.get("message",None)
         #username=text_data_dict.get("username",None)
         #print(username)
-        print(f"text_data_dict: {text_data_dict}")
+        print(text_data_dict)
         command=text_data_dict["command"]
         self.commands[command](self,text_data_dict)
 
