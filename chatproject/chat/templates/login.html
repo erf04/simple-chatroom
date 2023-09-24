@@ -31,7 +31,7 @@
     <form action="" method="post">
       {% csrf_token %}
         <input type="text" name="username" id="" class="form-control"><br>
-        <input type="password" name="password" id="" class="form-control"><br>
+        <input type="password" name="password" id="pass" class="form-control"><br>
         <input type="submit" value="login" class="btn btn-success">
     </form>
     <p>
@@ -40,4 +40,12 @@
     </p>
 </div>
 </body>
+<script>
+  document.onkeyup = function(e) {
+            if (e.key === 'Enter') {  // enter, return
+                document.querySelector('.btn').click();
+            }
+        };
+
+</script>
 </html>

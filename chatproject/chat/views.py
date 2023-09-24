@@ -7,6 +7,7 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from .models import Chat,Message
 from .forms import SignupForm
+from django.contrib.auth.forms import UserCreationForm
 # Create your views here.
 
 @login_required(login_url='login')
@@ -30,12 +31,15 @@ def room(request,room_name):
         chat.members.add(username)
     else:
         chat_model[0].members.add(username)
-
-
+    messages=Message.objects.filter(related_chat=chat_model[0])
+    member_count=chat_model[0].members.count()
+    print(member_count)
     print("username" +':' +str(username))
     return render(request,"chat/room.html",{
         "room_name":room_name,
         "username":mark_safe(json.dumps(username.username)),
+        "messages":messages,
+        "member_count":member_count,
     })
 
 def login(request :HttpRequest):
@@ -43,6 +47,7 @@ def login(request :HttpRequest):
         username=request.POST["username"]
         password=request.POST["password"]
         user=authenticate(request,username=username,password=password)
+        print(user)
         if user is not None:
             login_user(request,user)
             messages.success(request,"you logged in successfully")
@@ -62,15 +67,41 @@ def logout(request):
 
 def signup(request :HttpRequest):
     if request.method=="POST":
-        form=SignupForm(request.POST)
+        form=UserCreationForm(request.POST)
         if form.is_valid():
             form.save()
             messages.success(request,"you signed up successfully")
-            return redirect('index')
+            messages.success(request,"use your username and password to login now")
+            return redirect('login')
         else:
             messages.error(request,"there is something wrong!")
         
-    form=SignupForm()
+    form=UserCreationForm()
     return render(request,"signup.html",{
         "form":form,
     })
+
+
+@login_required(login_url="login")
+def delete_message(request :HttpRequest,id):
+    message=Message.objects.get(pk=id)
+    message.delete()
+    chat=message.related_chat
+    return redirect("room",chat)
+
+
+def edit_message(request:HttpRequest,id,replace):
+    messagemodel=Message.objects.get(pk=id)
+    messagemodel.content=replace
+    messagemodel.save()
+    chat=messagemodel.related_chat
+    return redirect("room",chat)
+
+
+def clear_chat(request,roomname):
+    related_chat=Chat.objects.get(roomname=roomname)
+    messages=Message.objects.filter(related_chat=related_chat)
+    for message in messages:
+        message.delete()
+    return redirect('room',roomname)
+

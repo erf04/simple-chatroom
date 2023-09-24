@@ -59,31 +59,35 @@
           </div>
           <!-- info -->
           <div class="col-auto p-0 me-auto" id="info">
-            <div class="h3" id="name">name</div>
-            <div class="display6" id="on-or-off">online</div>
+            <div class="h3" id="name">Room name</div>
+            {% if member_count == 1 %}
+            <div class="display6" id="members">1 member</div>
+            {% else %}
+            <div class="display6" id="members">{{member_count}} members</div>
+            {% endif %}
           </div>
           <!-- menu -->
-          <div class="col-auto me-1" id="menu">
-            <button class="border-0 bg-light" id="menu-btn">
-              <svg
-                xmlns="three-dots.svg"
-                width="16"
-                height="16"
-                fill="currentColor"
-                class="bi bi-three-dots"
-                viewBox="0 0 16 16"
-              >
-                <path
-                  d="M3 9.5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3z"
-                />
-              </svg>
+          <div class="dropdown col-auto me-1">
+            <button class="btn btn-dark dropdown-toggle border-0" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+            
             </button>
+            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+            <li><a class="dropdown-item" id="clear_chat" style="cursor: pointer;">clear chat</a></li>
+            <li><a class="dropdown-item" href="#">Another action</a></li>
+            <li><a class="dropdown-item" href="#">Something else here</a></li>
+            </ul>
           </div>
         </div>
         <!-- chat part -->
-        <div id="chat-sagi" oncontextmenu="return false;">
-          <!-- <div class="bg-dark d-block" id="chat-log"></div> -->
-          <div class="d-block" id="chat-log"></div>
+        <!-- <div class="bg-dark d-block" id="chat-log"></div> -->
+        <div class="d-block" id="chat-log">
+          <!-- <audio src="" id="voice" controls style="display: none"></audio> -->
+        </div>
+        <div class="alert alert-info alert-dismissible fade show" id="show-reply" style="display: none;margin-bottom: 0;padding: 8px;">
+          lsfnlsnflmnl
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
         </div>
         <!-- footer -->
         <div class="row p-0 m-0 w-100 h-14 align-items-center" id="footer">
@@ -118,55 +122,55 @@
               onmouseleave="hideEmoji()"
             >
               <ul class="p-0">
-                <li><a onclick="addEmoji(0)">&#128525;</a></li>
-                <li><a onclick="addEmoji(1)">&#128512;</a></li>
-                <li><a onclick="addEmoji(2)">&#128515;</a></li>
-                <li><a onclick="addEmoji(3)">&#128516;</a></li>
-                <li><a onclick="addEmoji(4)">&#128513;</a></li>
-                <li><a onclick="addEmoji(5)">&#128518;</a></li>
-                <li><a onclick="addEmoji(6)">&#128517;</a></li>
-                <li><a onclick="addEmoji(7)">&#129315;</a></li>
-                <li><a onclick="addEmoji(8)">&#128514;</a></li>
-                <li><a onclick="addEmoji(9)">&#128578;</a></li>
-                <li><a onclick="addEmoji(10)">&#128579;</a></li>
-                <li><a onclick="addEmoji(11)">&#128521;</a></li>
-                <li><a onclick="addEmoji(12)">&#128522;</a></li>
-                <li><a onclick="addEmoji(13)">&#128519;</a></li>
-                <li><a onclick="addEmoji(14)">&#129392;</a></li>
+                <li><span onclick="addEmoji(0)">&#128512;</span></li>
+                <li><span onclick="addEmoji(1)">&#128515;</span></li>
+                <li><span onclick="addEmoji(2)">&#128516;</span></li>
+                <li><span onclick="addEmoji(3)">&#128513;</span></li>
+                <li><span onclick="addEmoji(4)">&#128518;</span></li>
+                <li><span onclick="addEmoji(5)">&#128517;</span></li>
+                <li><span onclick="addEmoji(6)">&#129315;</span></li>
+                <li><span onclick="addEmoji(7)">&#128514;</span></li>
+                <li><span onclick="addEmoji(8)">&#128578;</span></li>
+                <li><span onclick="addEmoji(9)">&#128579;</span></li>
+                <li><span onclick="addEmoji(10)">&#128521;</span></li>
+                <li><span onclick="addEmoji(11)">&#128522;</span></li>
+                <li><span onclick="addEmoji(12)">&#128519;</span></li>
+                <li><span onclick="addEmoji(13)">&#129392;</span></li>
+                <li><span onclick="addEmoji(14)">&#128525;</span></li>
               </ul>
               <ul>
-                <li><a onclick="addEmoji(15)">&#128525;</a></li>
-                <li><a onclick="addEmoji(16)">&#129321;</a></li>
-                <li><a onclick="addEmoji(17)">&#128536;</a></li>
-                <li><a onclick="addEmoji(18)">&#128535;</a></li>
-                <li><a onclick="addEmoji(19)">&#128538;</a></li>
-                <li><a onclick="addEmoji(20)">&#128537;</a></li>
-                <li><a onclick="addEmoji(21)">&#128523;</a></li>
-                <li><a onclick="addEmoji(22)">&#128539;</a></li>
-                <li><a onclick="addEmoji(23)">&#128540;</a></li>
-                <li><a onclick="addEmoji(24)">&#129322;</a></li>
-                <li><a onclick="addEmoji(25)">&#128541;</a></li>
-                <li><a onclick="addEmoji(26)">&#129297;</a></li>
-                <li><a onclick="addEmoji(27)">&#129303;</a></li>
-                <li><a onclick="addEmoji(28)">&#129325;</a></li>
-                <li><a onclick="addEmoji(29)">&#129323;</a></li>
+                <li><span onclick="addEmoji(15)">&#129321;</span></li>
+                <li><span onclick="addEmoji(16)">&#128536;</span></li>
+                <li><span onclick="addEmoji(17)">&#128535;</span></li>
+                <li><span onclick="addEmoji(18)">&#128538;</span></li>
+                <li><span onclick="addEmoji(19)">&#128537;</span></li>
+                <li><span onclick="addEmoji(20)">&#128523;</span></li>
+                <li><span onclick="addEmoji(21)">&#128539;</span></li>
+                <li><span onclick="addEmoji(22)">&#128540;</span></li>
+                <li><span onclick="addEmoji(23)">&#129322;</span></li>
+                <li><span onclick="addEmoji(24)">&#128541;</span></li>
+                <li><span onclick="addEmoji(25)">&#129297;</span></li>
+                <li><span onclick="addEmoji(26)">&#129303;</span></li>
+                <li><span onclick="addEmoji(27)">&#129325;</span></li>
+                <li><span onclick="addEmoji(28)">&#129323;</span></li>
+                <li><span onclick="addEmoji(29)">&#129300;</span></li>
               </ul>
               <ul>
-                <li><a onclick="addEmoji(30)">&#129300;</a></li>
-                <li><a onclick="addEmoji(31)">&#129296;</a></li>
-                <li><a onclick="addEmoji(32)">&#129320;</a></li>
-                <li><a onclick="addEmoji(33)">&#128528;</a></li>
-                <li><a onclick="addEmoji(34)">&#128529;</a></li>
-                <li><a onclick="addEmoji(35)">&#128566;</a></li>
-                <li><a onclick="addEmoji(36)">&#128527;</a></li>
-                <li><a onclick="addEmoji(37)">&#128530;</a></li>
-                <li><a onclick="addEmoji(38)">&#128580;</a></li>
-                <li><a onclick="addEmoji(39)">&#128556;</a></li>
-                <li><a onclick="addEmoji(40)">&#128524;</a></li>
-                <li><a onclick="addEmoji(41)">&#128532;</a></li>
-                <li><a onclick="addEmoji(42)">&#128554;</a></li>
-                <li><a onclick="addEmoji(43)">&#129316;</a></li>
-                <li><a onclick="addEmoji(44)">&#128564;</a></li>
+                <li><span onclick="addEmoji(30)">&#129296;</span></li>
+                <li><span onclick="addEmoji(31)">&#129320;</span></li>
+                <li><span onclick="addEmoji(32)">&#128528;</span></li>
+                <li><span onclick="addEmoji(33)">&#128529;</span></li>
+                <li><span onclick="addEmoji(34)">&#128566;</span></li>
+                <li><span onclick="addEmoji(35)">&#128527;</span></li>
+                <li><span onclick="addEmoji(36)">&#128530;</span></li>
+                <li><span onclick="addEmoji(37)">&#128580;</span></li>
+                <li><span onclick="addEmoji(38)">&#128556;</span></li>
+                <li><span onclick="addEmoji(39)">&#128524;</span></li>
+                <li><span onclick="addEmoji(40)">&#128532;</span></li>
+                <li><span onclick="addEmoji(41)">&#128554;</span></li>
+                <li><span onclick="addEmoji(42)">&#129316;</span></li>
+                <li><span onclick="addEmoji(43)">&#128564;</span></li>
+                <li><span onclick="addEmoji(44)">&#128567;</span></li>
               </ul>
             </div>
           </div>
@@ -176,15 +180,22 @@
               class="p-1 me-auto w-100 border-0 form-control"
               type="text"
               placeholder="Type your message..."
+              onmousedown="findType(this)"
               id="chat-message-input"
             />
+            <!-- <textarea
+              class="p-1 me-auto w-100 border-0 form-control"
+              placeholder="Type your message..."
+              id="chat-message-input"
+              style="resize: none; height: 5px"
+            ></textarea> -->
           </div>
           <!-- attachment -->
           <div class="col-1 p-0 m-0" id="attachment">
             <label class="w-26 h-26">
               <i
                 class="fa fa-paperclip"
-                style="font-size: 30px"
+                style="font-size: 30px; transform: scaleX(-1)"
                 id="file-btn"
               ></i>
               <input type="file" />
@@ -193,44 +204,53 @@
           <!-- send button -->
           <div class="col-1 p-0 m-0" id="send-sagi">
             <button class="border-0 p-0 m-0" id="chat-message-submit">
-              <svg
+              <i
+                class="fa fa-microphone"
+                style="font-size: 30px; transform: rotateY('angle')"
+                id="send"
+              ></i>
+              <!-- <svg
                 xmlns="send.svg"
                 width="25"
                 height="25"
-                class="bi bi-send"
                 viewBox="0 0 16 16"
+                id="send"
               >
                 <path
                   d="M15.854.146a.5.5 0 0 1 .11.54l-5.819 14.547a.75.75 0 0 1-1.329.124l-3.178-4.995L.643 7.184a.75.75 0 0 1 .124-1.33L15.314.037a.5.5 0 0 1 .54.11ZM6.636 10.07l2.761 4.338L14.13 2.576 6.636 10.07Zm6.787-8.201L1.591 6.602l4.339 2.76 7.494-7.493Z"
                 />
-              </svg>
+              </svg> -->
             </button>
           </div>
         </div>
       </div>
     </div>
-    <!-- src="{% static bootstrap.bundle.min.js %}" -->
     <script
-      src="	https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"
       integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm"
       crossorigin="anonymous"
     ></script>
-    <script src="{% static 'script.js' %}"></script>
+
     <script src="{% static '3a2eaf6206.js' %}"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <script src="{% static 'reconnecting-websocket.min.js' %}"></script>
+    <script src="{% static 'script.js' %}"></script>
     {{ room_name|json_script:"room-name" }}
     <script>
       var div = $('#chat-log');
       var chat = document.getElementById("chat-log");
-      var chatSagi = document.getElementById("chat-sagi");
-      var Height = chat.clientHeight;
-
-
+      chat.oncontextmenu = () => {return false};
       const roomName = JSON.parse(document.getElementById('room-name').textContent);
+      var isreply=false;
+      var from_id;
+      var messages_div_List=[];
+      var messages_data_List=[];
+      var num;
+      
       document.getElementById("name").innerHTML = roomName;
       var username={{ username }};
+
       const chatSocket = new ReconnectingWebSocket(
           'ws://'
           + window.location.host
@@ -240,113 +260,475 @@
       );
 
       chatSocket.onopen = function(e) {
-          chatSocket.send(JSON.stringify({
-              "command":"fetch_message",
-              "roomname":roomName
-          }));
-        }
-
-      chatSocket.onmessage = function(e) {
-          const data = JSON.parse(e.data);
-          var messageNum = data["message"].length;
-          // console.log(data);
-          if (data["command"] === "fetch_message"){
-            // console.log(data);
-            for(let i =0 ; i <=data["message"].length-1; i++){
-              content = data["message"][i];
-              create_chat(content, messageNum);
-              // document.querySelector('#chat-log').innerHTML += (content + '\n');
-            }
-          } else {
-              //console.log(data["message"]);
-              create_chat(data["message"], messageNum);
-              div.animate({scrollTop: Height * messageNum * 100}, 0);
-              //document.querySelector('#chat-log').innerHTML += (data["message"]["content"] + '\n');
-          }
-      };
-
-      var input = document.getElementById("chat-message-input");
-      function create_chat(data, messages) {
-        var data_div = document.createElement("div");
-        var name = document.createElement("p");
-        name.classList.add("name");
-        var matn = document.createElement("p");
-        matn.classList.add("matn");
-        var date = document.createElement("p");
-        date.classList.add("date");
-        data_div.appendChild(name);
-        data_div.appendChild(matn);
-        data_div.appendChild(date);
-        name.style.cursor = "default";
-        matn.style.cursor = "text";
-        date.style.cursor = "default";
-        name.style.width = "fit-content";
-        matn.style.width = "fit-content";
-        const author = data["__str__"];
-        name.innerHTML = author;
-        // div.animate({scrollTop: Height * messages * 100}, 20000);
-        div.animate({scrollTop: Height * (messages + 1) * 100}, 0);
-
-        var time = "";
-        for (let i = 11;;i++) {
-          if (i === 16) {
-            break;
-          }
-          time += data["timestamp"][i];
-        }
-
-        name.style.marginBottom = "7px";
-        matn.style.marginBottom = "7px";
-        matn.innerHTML = data["content"];
-        date.style.color = "gray";
-        date.style.margin = "0px";
-        date.style.fontSize = "12px";
-        date.innerHTML = time;
-        data_div.style.maxWidth = "500px";
-        data_div.style.minWidth = "100px";
-        name.style.fontWeight = "bold";
-        if (author == username) {
-          data_div.classList.add("person1");
-          data_div.style.marginLeft = "auto";
-          matn.style.paddingLeft = "15px";
-          data_div.style.direction = "rtl";
-          matn.style.direction = "ltr";
-          date.style.direction = "ltr";
-        } else {
-          data_div.classList.add("person2");
-          matn.style.paddingRight = "15px";
-          date.style.textAlign = "right";
-        }
-        chat.appendChild(data_div)
+        chatSocket.send(JSON.stringify({
+            "command":"fetch_message",
+            "roomname":roomName
+        }));
       }
 
-      chatSagi.addEventListener("contextmenu", () => {
-        alert("horaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa!");
+      chatSocket.onmessage = function(e) {
+        const data = JSON.parse(e.data);
+        // console.log(data);
+        var n = 0;
+        
+        if (data["command"] === "fetch_message"){
+          console.log(data);
+          num=data["message"].length;
+          for(let i = data["message"].length-1; i >= 0; i--){
+            content = data["message"][i];
+            n++;
+            message = new Message(content, username, n);
+            let data_div = message.create_message();
+            messages_div_List.push(data_div);
+            messages_data_List.push(message);
+            chat.appendChild(data_div);
+          }
+          scroll_till_end(0); 
+        } else {
+            console.log(data["message"]);
+            message = new Message(data["message"], username, n);
+            let data_div=message.create_message();
+            chat.appendChild(data_div);
+            scroll_till_end("slow");
+          }
+        };
+
+          // chat.addEventListener("scroll", () => {
+          //   console.log("pedar sag");
+          // });
+          document.getElementById("clear_chat").addEventListener("click",function(){
+          window.location.pathname="/chat/clear_chat/"+roomName+"/";
+           })
+          var firstId = 0, once = true;
+
+          class Message {
+
+          constructor(data, username, n) {
+              
+            this.num = n;
+            this.id = data["id"];
+            this.author = data["__str__"];
+            this.content = data["content"];
+            this.replystatus = data["Isreply"];
+            if (this.replystatus) {
+              this.replied_content = data["replied_content"];
+              this.replied_id=data["replied_id"];
+            }
+            //console.log(data["timestamp"]);
+            var time = "";
+            for (let i = 11;;i++) {
+              if (i === 16) {
+                break;
+              }
+              time += data["timestamp"][i];
+            }
+
+            //console.log("i "+i);
+            this.time = time;
+            this.username = username;
+            //console.log(this.id);
+          }
+
+          #set_setting(){
+            var message_setting = document.createElement("div");
+            message_setting.classList.add("setting");
+            message_setting.style.backgroundColor = "white";
+            message_setting.style.padding = "5px";
+            message_setting.style.borderRadius = "10px";
+            message_setting.style.boxShadow = "-2px 2px 10px black";
+            message_setting.style.position = "relative";
+            message_setting.style.float = "left";
+            message_setting.style.zIndex = "100";
+            message_setting.style.direction = "ltr";
+            this.message_setting = message_setting;
+            return message_setting;
+          }
+
+          #set_delete_option(){
+
+            //console.log("in delete option:"+this.id);
+            var id=this.id;
+            // console.log(id);
+            var del = document.createElement("button");
+            del.classList.add("delete");
+            var delete_icon = document.createElement("i");
+            delete_icon.setAttribute("class", "fa fa-trash");
+            delete_icon.style.marginRight = "8px";
+            del.appendChild(delete_icon);
+            del.innerHTML += "Delete";
+            del=this.#content_menu_style_helper(del);
+            this.message_setting.appendChild(del);
+            //console.log(id);
+            del.addEventListener("click",function() {
+              window.location.pathname="/chat/del_msg/"+id+"/";
+            })
+          }
+
+          #set_reply_option() {
+
+            var reply = document.createElement("button");
+            reply.classList.add("reply");
+            var reply_icon = document.createElement("i");
+            reply_icon.setAttribute("class", "fa fa-reply");
+            reply_icon.style.marginRight = "8px";
+            reply.appendChild(reply_icon);
+            reply.innerHTML += "Reply";
+            reply = this.#content_menu_style_helper(reply);
+            this.message_setting.appendChild(reply);
+            var id = this.id;
+
+            var repText = this.content;
+            console.log("footer:"+$("#footer").height());
+
+            reply.addEventListener("click", function() {
+             
+              $("#show-reply").text(repText);
+              $("#show-reply").css("display","block");
+              isreply = true;
+              from_id = id;
+             $('#chat-message-input').focus();
+              $("#chat-message-submit").click(function(){
+                $("#show-reply").hide();
+              })
+            });
+          }
+
+          #set_edit_option() {
+            var edit = document.createElement("button");
+            edit.classList.add("edit");
+            var edit_icon = document.createElement("i");
+            edit_icon.setAttribute("class", "fa fa-pencil");
+            edit_icon.style.marginRight = "8px";
+            edit.appendChild(edit_icon);
+            edit.innerHTML += "Edit";
+            edit = this.#content_menu_style_helper(edit);
+            edit.style.marginTop = "4px";
+            this.message_setting.appendChild(edit);
+            var id = this.id;
+            var matn = this.content;
+
+            edit.addEventListener("click", function() {
+              document.querySelector('#chat-message-input').focus();
+              var input = document.getElementById("chat-message-input");
+
+              input.value = matn;
+              document.querySelector('#chat-message-input').onkeyup = function(e) {
+                if (e.key === 'Enter') {  // enter, return
+                  let str = input.value
+                  window.location.pathname = '/chat/edit_msg/' + id +'/' + (str || matn) +'/';
+                }
+              };
+            });
+          }
+
+          #set_speak_option(){
+            var speak = document.createElement("button");
+            speak.classList.add('speak');
+            var speak_icon = document.createElement("i");
+            speak_icon.setAttribute("class", "fa fa-volume-up");
+            speak_icon.style.marginRight = "8px";
+            speak.appendChild(speak_icon);
+            speak.innerHTML += "Speak";
+            var speed = 1;
+            speak = this.#content_menu_style_helper(speak);
+            speak.style.marginTop = "4px";
+            this.message_setting.appendChild(speak);
+            var content = this.content;
+
+            speak.addEventListener("click", () => {
+              const text = new SpeechSynthesisUtterance(content);
+              text.rate = speed;
+              speechSynthesis.speak(text);
+            });
+          }
+
+          #set_copy_option(){
+            var copy = document.createElement("button");
+            copy.classList.add("edit");
+            var copy_icon = document.createElement("i");
+            copy_icon.setAttribute("class", "fa fa-copy");
+            copy_icon.style.marginRight = "8px";
+            copy.appendChild(copy_icon);
+            copy.innerHTML += "Copy Text";
+            copy=this.#content_menu_style_helper(copy);
+            copy.style.marginTop = "4px";// not for reply
+            this.message_setting.appendChild(copy);
+            var content=this.content;
+
+            copy.addEventListener("click", () => {
+              navigator.clipboard.writeText(content);
+              alert("Text Copied!");
+            });
+
+          }
+
+          #content_menu_style_helper(element){
+            var show = true;
+            element.style.display = "block";
+            element.style.border = "none";
+            element.style.borderRadius = "10px";
+            element.style.backgroundColor = "white";
+            element.style.width = "100%";
+            element.style.textAlign = "left";
+            element.onmouseover = () => {element.style.backgroundColor = "#c1c1c1"; element.style.transition = "0.3s"};
+            element.onmouseleave = () => {element.style.backgroundColor = "white"; element.style.transition = "0.3s"};
+            element.onclick = () => {this.message_setting.style.display = 'none'; show = true};
+            return element;
+          }
+
+          #set_name(){
+            var name = document.createElement("p");
+            name.classList.add("name");
+            //console.log(this.author);
+            name.innerHTML = this.author;
+            name.style.cursor = "default";
+            name.style.width = "fit-content";
+            name.style.marginBottom = "7px";
+            name.style.fontWeight = "bold";
+            return name;
+
+          }
+
+          #set_content(){
+            var matn = document.createElement("p");
+            matn.classList.add("matn");
+            matn.style.cursor = "text";
+            matn.style.width = "fit-content";
+            matn.style.marginBottom = "7px";
+            matn.innerHTML = this.content;
+            return matn;
+          }
+
+          #set_date(){
+            var date = document.createElement("p");
+            date.classList.add("date");
+            date.style.cursor = "default";
+            date.style.color = "gray";
+            date.style.margin = "0px";
+            date.style.fontSize = "12px";
+            if (this.replystatus)
+              date.innerHTML = this.time + "  replied";
+            else{
+              date.innerHTML = this.time + "  not replied";
+            }
+            return date;
+          }
+
+          create_message() {
+           
+            // idList += [this.id];
+            if (once)  {
+              firstId = this.id;
+              once = false;
+            }
+            var data_div = document.createElement("div");
+            let name = this.#set_name();
+            let matn = this.#set_content();
+            let date = this.#set_date();
+            data_div.appendChild(name);
+
+            if (this.replystatus) {
+              var repDiv = document.createElement("div");
+              repDiv.style.padding = "5px";
+              repDiv.style.backgroundColor = "white";
+              repDiv.style.marginBottom = "5px";
+              repDiv.style.borderRadius = "10px";
+              repDiv.style.opacity = "0.8";
+              repDiv.classList.add("replied_content");
+              if (this.replied_content.length >= 15) {
+                repDiv.innerHTML = "..." + this.replied_content.slice(0, this.replied_content.length / 3);
+              } else {
+                repDiv.innerHTML = this.replied_content.slice(0,);
+              }
+              repDiv.addEventListener("click",() => {
+                let number=find_divs_number(this.replied_id);
+                console.log("number:"+number);
+                scroll(0,number);
+
+              })
+              data_div.appendChild(repDiv);
+            }
+
+            //data_div.appendChild(voice);
+            data_div.appendChild(matn);
+            data_div.appendChild(date);
+            data_div.style.maxWidth = "500px";
+            data_div.style.minWidth = "100px";
+            if (this.author == username) {
+              data_div.classList.add("person1");
+              data_div.style.marginLeft = "auto";
+              matn.style.paddingLeft = "15px";
+              data_div.style.direction = "rtl";
+              matn.style.direction = "ltr";
+              date.style.direction = "ltr";
+            } else {
+              data_div.classList.add("person2");
+              matn.style.paddingRight = "15px";
+              date.style.textAlign = "right";
+            }
+            // create setting and add options
+            this.#set_setting();
+            this.#set_reply_option();
+            this.#set_delete_option();
+            this.#set_copy_option();
+            this.#set_speak_option();
+            this.#set_edit_option();
+            data_div.appendChild(this.message_setting);
+            var content_menu=this.message_setting;
+            content_menu.style.display = "none";
+
+            messageDir(matn);
+
+
+            data_div.addEventListener("contextmenu", () => {
+              var chat = document.getElementById("chat-log");
+              content_menu.style.display = "block";
+              
+              scroll("slow", this.num);
+              // console.log(ht);
+              chat.onclick = () => {
+                content_menu.style.display = "none";
+              };
+            });
+
+            return data_div;
+          }
+        }
+
+      var input = document.getElementById("chat-message-input");
+      var text = input.value;
+      var members = document.getElementById("members");
+      var innerMembers = members.innerHTML;
+      setInterval(() => {
+        if (text !== input.value) {
+          members.innerHTML = username + " is typing...";
+          text = input.value;
+        } else if (text === input.value || text === "") {
+          members.innerHTML = innerMembers;
+        }
+      }, 500);
+
+      function messageDir(element) {
+        let char = new RegExp("[\u0600-\u06FF]");
+        if (char.test(element.innerHTML) === true) {
+          element.style.direction = "rtl";
+        } else {
+          element.style.direction = "ltr";
+        }
+      }
+
+      function findType(element) {
+        let char = new RegExp("[\u0600-\u06FF]");
+        if (char.test(element.value) === true) {
+          element.style.direction = "rtl";
+        } else {
+          element.style.direction = "ltr";
+        }
+      }
+
+      setInterval(() => {
+        findType(input);
+      }, 1);
+
+      var message1 = document.getElementsByClassName("person1");
+      var message2 = document.getElementsByClassName("person2");
+     
+      function calculate_height(){
+        var ht = 0;
+        //console.log(ht,num,speed);
+        for (let i = 0; i != num; i++) {
+         //console.log("message"+i+":"+messagesList[i].clientHeight);
+          ht += messages_div_List[i].clientHeight;
+        }
+
+        return ht;
+      }
+      
+      
+      function scroll(speed, num) {
+        console.log("num:"+num);
+        var ht = 0;
+        //console.log(ht,num,speed);
+        for (let i = 0; i != num; i++) {
+         //console.log("message"+i+":"+messagesList[i].clientHeight);
+          ht += messages_div_List[i].clientHeight;
+        }
+        
+        //console.log(ht);
+        ht += 30;
+        $("#chat-log").animate({scrollTop: ht}, speed);
+        
+      }
+
+      function scroll_till_end(speed){
+        var ht=0;
+        $("#chat-log div").each(()=>{
+          ht+=$(this).height()
+        })
+        $("#chat-log").animate({scrollTop: ht}, speed);
+      }
+
+      function find_divs_number(id){
+        for (let i = 0; i < messages_data_List.length; i++) {
+          const element = messages_data_List[i];
+          if (element.id===id){
+            if (i===0){
+              return i;
+            }
+            return i-1;
+          }
+          
+        }
+      }
+
+
+
+      var content = document.getElementById("members");
+      document.addEventListener("DOMContentLoaded", function () {
+        let textContent = `${navigator.onLine ? "Online" : "Offline"}`;
+        // content.innerHTML = textContent;
       });
 
+      const send = document.getElementById("send");
+      setInterval(check_inp, 1);
+      function check_inp() {
+        if (input.value !== "") {
+          send.setAttribute("class", "fa fa-send");
+          send.style.fontSize = "23px";
+        } else {
+          send.setAttribute("class", "fa fa-microphone");
+          send.style.fontSize = "30px";
+        }
+      }
+
       chatSocket.onclose = function(e) {
-          console.error('Chat socket closed unexpectedly');
+        console.error('Chat socket closed unexpectedly');
       };
 
       document.querySelector('#chat-message-input').focus();
       document.querySelector('#chat-message-input').onkeyup = function(e) {
-          if (e.key === 'Enter' && input.value !== "") {  // enter, return
-              document.querySelector('#chat-message-submit').click();
-              // div.animate({scrollTop: Height * 80 * 100}, 0);
-          }
-        };
+        if (e.key === 'Enter' && input.value !== "") {  // enter, return
+          document.querySelector('#chat-message-submit').click();
+        }
+      };
 
       document.querySelector('#chat-message-submit').onclick = function(e) {
         if (input.value !== "") {
           const messageInputDom = document.querySelector('#chat-message-input');
           const message = messageInputDom.value;
+          // const message = messageInputDom.innerHTML;
           chatSocket.send(JSON.stringify({
-              'message': message,
-              'command':'new_message',
-              'username':username,
-              "roomname":roomName
+            'message': message,
+            'command':'new_message',
+            'username':username,
+            "roomname":roomName,
+            "reply":{
+              "status":isreply,
+              "from_id":from_id,
+            },
           }));
           messageInputDom.value = '';
+          // messageInputDom.innerHTML = '';
         }
       };
     </script>
@@ -355,23 +737,41 @@
 
 <!--
 Ideas & problems:
-  scroll missed a message
-  typing into input box (new line)
-  right click on a message and show setting:
-    copy text
-    reply
-    speak
-    delete
-    edit
+  scroll missed a message                                             ++++++
+  sent message time                                                   ++++++
+  typing into input box (new line)                                    ------button or textarea (message doesn't sent)           
+  right click on a message and show setting:                          ++++++(on top of another divs)
+    edit                                                              ++++++ 
+    delete                                                            ++++++
+    reply                                                             ++++++
+    copy text                                                         ++++++
+    speak                                                             ++++++
+    properties 
   dropdown on header:
-    search
-    clear chat
+    search   (ctrl +F) vala be khoda :>
+    clear chat                                                        ++++++
     change color
+    mute sound effect
   sound when message recive (or send)
+  notification
   good coloring
   dark mode (light mode)
   add or change profile
-  number of members (instead of online or offline)
-  sent message time
-  attachment
+  number of members (instead of online or offline)                    ++++++
+  attachment (image)
+  voice message                                                       ------
+  display scroll when scrolling or hover
+  PV
+  animate icons
+  change send to voice (or reverse)                                   ++++++
+  styling audio tag
+  is typing...                                                        ++++++  
+  seen or not seen
+  display replied message on top of input
+  scroll down when right click
+  speed of speaking                                                   ++++++
+  edited text
+  inline border
+  language detection
+  online or offline
 -->

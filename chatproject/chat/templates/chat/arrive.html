@@ -37,11 +37,27 @@
     <br>
     <input id="room-name-submit" type="button" value="Enter" class="btn btn-success">
     </div>  
-    <div class="continer">
-        <h1>you can join your old rooms</h1>
-        {% for chatroom in chatrooms %}
-            <a href="http://localhost:8000/chat/index/{{chatroom}}">{{chatroom}}</a>
-        {% endfor %}
+    <div class="continer text-center">
+        <h3 class="text-danger ">you can join your old rooms</h3>
+        
+        <ol class="list-group list-group-numbered">
+            {% for chatroom in chatrooms %}
+            <li class="list-group-item d-flex justify-content-between align-items-start w-50  offset-3">
+              <div class="ms-2 me-auto">
+                <a href="http://localhost:8000/chat/index/{{chatroom}}"><div class="fw-bold">{{chatroom.roomname}}</div></a>
+                {% if chatroom.members.count == 1 %}
+                    {{chatroom.members.count}} member
+                {% else %}
+                    {{chatroom.members.count}} members
+                {% endif %}
+                
+              </div>
+              <span class="badge bg-primary rounded-pill">14</span>
+            </li>
+            {% endfor %}
+          </ol>
+            
+        
     </div>
     <script>
         document.querySelector('#room-name-input').focus();
