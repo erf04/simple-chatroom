@@ -68,13 +68,41 @@
           </div>
           <!-- menu -->
           <div class="dropdown col-auto me-1">
-            <button class="btn btn-dark dropdown-toggle border-0" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-            
+            <button
+              class="border-0 bg-light"
+              type="button"
+              id="dropdownMenuButton1"
+              data-bs-toggle="dropdown"
+              aria-expanded="false"
+            >
+              <svg
+                xmlns="three-dots.svg"
+                width="16"
+                height="16"
+                fill="currentColor"
+                class="bi bi-three-dots"
+                viewBox="0 0 16 16"
+              >
+                <path
+                  d="M3 9.5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3z"
+                />
+              </svg>
             </button>
+            <!-- <button
+              class="btn btn-dark dropdown-toggle border-0"
+              type="button"
+              id="dropdownMenuButton1"
+              data-bs-toggle="dropdown"
+              aria-expanded="false"
+            ></button> -->
             <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-            <li><a class="dropdown-item" id="clear_chat" style="cursor: pointer;">clear chat</a></li>
-            <li><a class="dropdown-item" href="#">Another action</a></li>
-            <li><a class="dropdown-item" href="#">Something else here</a></li>
+              <li>
+                <a class="dropdown-item" id="clear_chat" style="cursor: pointer"
+                  >clear chat</a
+                >
+              </li>
+              <li><a class="dropdown-item" href="#">Another action</a></li>
+              <li><a class="dropdown-item" href="#">Something else here</a></li>
             </ul>
           </div>
         </div>
@@ -83,9 +111,18 @@
         <div class="d-block" id="chat-log">
           <!-- <audio src="" id="voice" controls style="display: none"></audio> -->
         </div>
-        <div class="alert alert-info alert-dismissible fade show" id="show-reply" style="display: none;margin-bottom: 0;padding: 8px;">
+        <div
+          class="alert alert-info alert-dismissible fade show"
+          id="show-reply"
+          style="display: none; margin-bottom: 0; padding: 8px"
+        >
           lsfnlsnflmnl
-          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+          <button
+            type="button"
+            class="close"
+            data-dismiss="alert"
+            aria-label="Close"
+          >
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
@@ -247,7 +284,7 @@
       var messages_div_List=[];
       var messages_data_List=[];
       var num;
-      
+
       document.getElementById("name").innerHTML = roomName;
       var username={{ username }};
 
@@ -270,7 +307,7 @@
         const data = JSON.parse(e.data);
         // console.log(data);
         var n = 0;
-        
+
         if (data["command"] === "fetch_message"){
           console.log(data);
           num=data["message"].length;
@@ -283,7 +320,7 @@
             messages_data_List.push(message);
             chat.appendChild(data_div);
           }
-          scroll_till_end(0); 
+          scroll_till_end(0);
         } else {
             console.log(data["message"]);
             message = new Message(data["message"], username, n);
@@ -304,7 +341,7 @@
           class Message {
 
           constructor(data, username, n) {
-              
+
             this.num = n;
             this.id = data["id"];
             this.author = data["__str__"];
@@ -381,7 +418,7 @@
             console.log("footer:"+$("#footer").height());
 
             reply.addEventListener("click", function() {
-             
+
               $("#show-reply").text(repText);
               $("#show-reply").css("display","block");
               isreply = true;
@@ -515,7 +552,7 @@
           }
 
           create_message() {
-           
+
             // idList += [this.id];
             if (once)  {
               firstId = this.id;
@@ -583,7 +620,7 @@
             data_div.addEventListener("contextmenu", () => {
               var chat = document.getElementById("chat-log");
               content_menu.style.display = "block";
-              
+
               scroll("slow", this.num);
               // console.log(ht);
               chat.onclick = () => {
@@ -632,7 +669,7 @@
 
       var message1 = document.getElementsByClassName("person1");
       var message2 = document.getElementsByClassName("person2");
-     
+
       function calculate_height(){
         var ht = 0;
         //console.log(ht,num,speed);
@@ -643,8 +680,8 @@
 
         return ht;
       }
-      
-      
+
+
       function scroll(speed, num) {
         console.log("num:"+num);
         var ht = 0;
@@ -653,11 +690,11 @@
          //console.log("message"+i+":"+messagesList[i].clientHeight);
           ht += messages_div_List[i].clientHeight;
         }
-        
+
         //console.log(ht);
         ht += 30;
         $("#chat-log").animate({scrollTop: ht}, speed);
-        
+
       }
 
       function scroll_till_end(speed){
@@ -677,7 +714,7 @@
             }
             return i-1;
           }
-          
+
         }
       }
 
