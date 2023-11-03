@@ -275,7 +275,7 @@
     <script src="{% static 'script.js' %}"></script>
     {{ room_name|json_script:"room-name" }}
     <script>
-      var div = $('#chat-log');
+      // var div = $('#chat-log');
       var chat = document.getElementById("chat-log");
       chat.oncontextmenu = () => {return false};
       const roomName = JSON.parse(document.getElementById('room-name').textContent);
@@ -303,14 +303,14 @@
         }));
       }
 
+      var n = 0;
       chatSocket.onmessage = function(e) {
         const data = JSON.parse(e.data);
         // console.log(data);
-        var n = 0;
 
         if (data["command"] === "fetch_message"){
-          console.log(data);
-          num=data["message"].length;
+          // console.log(data);
+          num = data["message"].length;
           for(let i = data["message"].length-1; i >= 0; i--){
             content = data["message"][i];
             n++;
@@ -320,14 +320,18 @@
             messages_data_List.push(message);
             chat.appendChild(data_div);
           }
-          scroll_till_end(0);
+          // scroll_till_end(0);
+          // chat.scrollIntoView(false);
         } else {
-            console.log(data["message"]);
+            // console.log(data["message"]);
             message = new Message(data["message"], username, n);
-            let data_div=message.create_message();
+            let data_div = message.create_message();
             chat.appendChild(data_div);
-            scroll_till_end("slow");
+            // scroll_till_end("slow");
           }
+          chat.scroll({ top: chat.scrollHeight});
+          // chat.scroll({ top: element.scrollHeight, behavior: "smooth"});
+          console.log("message num: " + n);
         };
 
           // chat.addEventListener("scroll", () => {
@@ -339,9 +343,7 @@
           var firstId = 0, once = true;
 
           class Message {
-
           constructor(data, username, n) {
-
             this.num = n;
             this.id = data["id"];
             this.author = data["__str__"];
@@ -402,7 +404,6 @@
           }
 
           #set_reply_option() {
-
             var reply = document.createElement("button");
             reply.classList.add("reply");
             var reply_icon = document.createElement("i");
@@ -415,10 +416,9 @@
             var id = this.id;
 
             var repText = this.content;
-            console.log("footer:"+$("#footer").height());
+            // console.log("footer:"+$("#footer").height());
 
             reply.addEventListener("click", function() {
-
               $("#show-reply").text(repText);
               $("#show-reply").css("display","block");
               isreply = true;
@@ -578,10 +578,27 @@
                 repDiv.innerHTML = this.replied_content.slice(0,);
               }
               repDiv.addEventListener("click",() => {
-                let number=find_divs_number(this.replied_id);
+                let number = find_divs_number(this.replied_id);
+                // const sagi = document.getElementById(this.replied_content);
+                // console.log(this.replied_content);
+                // console.log(messages_data_List[4].content);
+                // for (let i=0 ; i != n ; i++) {
+                //   if (messages_data_List[i].content == this.replied_content) {
+                //     var sagi = messages_data_List[i];
+                //     break;
+                //   }
+                //   sagi.scrollIntoView();
+                // }
+                // console.log(sagi);
+                // $("#"+this.replied_content)
+                // const sagi = this;
+                // console.log(sagi);
+                // sagi.scrollIntoView();
+                // console.log(this.replied_id);
+                // repDiv.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                // repDiv.scrollIntoView();
                 console.log("number:"+number);
                 scroll(0,number);
-
               })
               data_div.appendChild(repDiv);
             }
@@ -611,7 +628,7 @@
             this.#set_speak_option();
             this.#set_edit_option();
             data_div.appendChild(this.message_setting);
-            var content_menu=this.message_setting;
+            const content_menu=this.message_setting;
             content_menu.style.display = "none";
 
             messageDir(matn);
@@ -620,8 +637,9 @@
             data_div.addEventListener("contextmenu", () => {
               var chat = document.getElementById("chat-log");
               content_menu.style.display = "block";
-
-              scroll("slow", this.num);
+              // content_menu.scrollIntoView(false);
+              content_menu.scrollIntoView({ behavior: 'smooth', block: 'center' });
+              // scroll("slow", this.num);
               // console.log(ht);
               chat.onclick = () => {
                 content_menu.style.display = "none";
@@ -683,7 +701,7 @@
 
 
       function scroll(speed, num) {
-        console.log("num:"+num);
+        // console.log("num:"+num);
         var ht = 0;
         //console.log(ht,num,speed);
         for (let i = 0; i != num; i++) {
@@ -714,11 +732,10 @@
             }
             return i-1;
           }
-
         }
       }
 
-
+      // console.log(num);
 
       var content = document.getElementById("members");
       document.addEventListener("DOMContentLoaded", function () {
@@ -746,6 +763,7 @@
       document.querySelector('#chat-message-input').onkeyup = function(e) {
         if (e.key === 'Enter' && input.value !== "") {  // enter, return
           document.querySelector('#chat-message-submit').click();
+          location.reload();
         }
       };
 
@@ -765,6 +783,7 @@
             },
           }));
           messageInputDom.value = '';
+          location.reload();
           // messageInputDom.innerHTML = '';
         }
       };
