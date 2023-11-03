@@ -368,8 +368,28 @@
             //console.log(this.id);
           }
 
+          /////////////////////////////////////////////////////////////////////////////
+          /////////////////////////////////////////////////////////////////////////////
+          /////////////////////////////////////////////////////////////////////////////
+          /////////////////////////////////////////////////////////////////////////////
+          /////////////////////////////////////////////////////////////////////////////
+          /////////////////////////////////////////////////////////////////////////////
+          /////////////////////////////////////////////////////////////////////////////
+          /////////////////////////////////////////////////////////////////////////////
+          /////////////////////////////////////////////////////////////////////////////
+          /////////////////////////////////////////////////////////////////////////////
+          /////////////////////////////////////////////////////////////////////////////
+          /////////////////////////////////////////////////////////////////////////////
+          /////////////////////////////////////////////////////////////////////////////
+          /////////////////////////////////////////////////////////////////////////////
+          /////////////////////////////////////////////////////////////////////////////
+          /////////////////////////////////////////////////////////////////////////////
+          /////////////////////////////////////////////////////////////////////////////
+          /////////////////////////////////////////////////////////////////////////////
+          /////////////////////////////////////////////////////////////////////////////
           #set_setting(){
             var message_setting = document.createElement("div");
+            message_setting.classList.add("dropdown-menu");
             message_setting.classList.add("setting");
             message_setting.style.backgroundColor = "white";
             message_setting.style.padding = "5px";
@@ -377,7 +397,7 @@
             message_setting.style.boxShadow = "-2px 2px 10px black";
             message_setting.style.position = "relative";
             message_setting.style.float = "left";
-            message_setting.style.zIndex = "100";
+            message_setting.style.zIndex = 1000;
             message_setting.style.direction = "ltr";
             this.message_setting = message_setting;
             return message_setting;
@@ -499,7 +519,7 @@
 
           }
 
-          #content_menu_style_helper(element){
+          #content_menu_style_helper(element) {
             var show = true;
             element.style.display = "block";
             element.style.border = "none";
@@ -552,17 +572,14 @@
           }
 
           create_message() {
-
-            // idList += [this.id];
-            if (once)  {
-              firstId = this.id;
-              once = false;
-            }
             var data_div = document.createElement("div");
             let name = this.#set_name();
             let matn = this.#set_content();
             let date = this.#set_date();
             data_div.appendChild(name);
+            // data_div.classList.add("dropdown-toggle");
+            data_div.style.whiteSpace = "nowrap";
+            data_div.style.overflow = "scroll";
 
             if (this.replystatus) {
               var repDiv = document.createElement("div");
@@ -572,10 +589,14 @@
               repDiv.style.borderRadius = "10px";
               repDiv.style.opacity = "0.8";
               repDiv.classList.add("replied_content");
-              if (this.replied_content.length >= 15) {
-                repDiv.innerHTML = "..." + this.replied_content.slice(0, this.replied_content.length / 3);
+              if (this.replied_content.length >= 90) {
+                repDiv.innerHTML = this.replied_content.slice(0, 30) + "...";
+                messageDir(repDiv);
+              } else if (this.replied_content.length >= 15) {
+                repDiv.innerHTML = this.replied_content.slice(0, this.replied_content.length / 3) + "...";
               } else {
                 repDiv.innerHTML = this.replied_content.slice(0,);
+                messageDir(repDiv);
               }
               repDiv.addEventListener("click",() => {
                 let number = find_divs_number(this.replied_id);
@@ -823,11 +844,11 @@ Ideas & problems:
   styling audio tag
   is typing...                                                        ++++++  
   seen or not seen
-  display replied message on top of input
-  scroll down when right click
+  display replied message on top of input                             ++++++
+  scroll down when right click                                        ++++++
   speed of speaking                                                   ++++++
   edited text
   inline border
-  language detection
-  online or offline
+  language detection                                                  ++++++
+  online or offline                                                   ++++++
 -->
