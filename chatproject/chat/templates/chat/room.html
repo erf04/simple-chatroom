@@ -279,11 +279,7 @@
       var chat = document.getElementById("chat-log");
       chat.oncontextmenu = () => {return false};
       const roomName = JSON.parse(document.getElementById('room-name').textContent);
-      var isreply=false;
-      var from_id;
-      var messages_div_List=[];
-      var messages_data_List=[];
-      var num;
+      var isreply = false, from_id, messages_div_List=[], messages_data_List=[], num;
 
       document.getElementById("name").innerHTML = roomName;
       var username={{ username }};
@@ -320,8 +316,6 @@
             messages_data_List.push(message);
             chat.appendChild(data_div);
           }
-          // scroll_till_end(0);
-          // chat.scrollIntoView(false);
         } else {
             // console.log(data["message"]);
             message = new Message(data["message"], username, n);
@@ -334,9 +328,6 @@
           console.log("message num: " + n);
         };
 
-          // chat.addEventListener("scroll", () => {
-          //   console.log("pedar sag");
-          // });
           document.getElementById("clear_chat").addEventListener("click",function(){
           window.location.pathname="/chat/clear_chat/"+roomName+"/";
            })
@@ -353,7 +344,7 @@
               this.replied_content = data["replied_content"];
               this.replied_id=data["replied_id"];
             }
-            //console.log(data["timestamp"]);
+
             var time = "";
             for (let i = 11;;i++) {
               if (i === 16) {
@@ -362,31 +353,10 @@
               time += data["timestamp"][i];
             }
 
-            //console.log("i "+i);
             this.time = time;
             this.username = username;
-            //console.log(this.id);
           }
 
-          /////////////////////////////////////////////////////////////////////////////
-          /////////////////////////////////////////////////////////////////////////////
-          /////////////////////////////////////////////////////////////////////////////
-          /////////////////////////////////////////////////////////////////////////////
-          /////////////////////////////////////////////////////////////////////////////
-          /////////////////////////////////////////////////////////////////////////////
-          /////////////////////////////////////////////////////////////////////////////
-          /////////////////////////////////////////////////////////////////////////////
-          /////////////////////////////////////////////////////////////////////////////
-          /////////////////////////////////////////////////////////////////////////////
-          /////////////////////////////////////////////////////////////////////////////
-          /////////////////////////////////////////////////////////////////////////////
-          /////////////////////////////////////////////////////////////////////////////
-          /////////////////////////////////////////////////////////////////////////////
-          /////////////////////////////////////////////////////////////////////////////
-          /////////////////////////////////////////////////////////////////////////////
-          /////////////////////////////////////////////////////////////////////////////
-          /////////////////////////////////////////////////////////////////////////////
-          /////////////////////////////////////////////////////////////////////////////
           #set_setting(){
             var message_setting = document.createElement("div");
             message_setting.classList.add("dropdown-menu");
@@ -404,10 +374,7 @@
           }
 
           #set_delete_option(){
-
-            //console.log("in delete option:"+this.id);
-            var id=this.id;
-            // console.log(id);
+            var id = this.id;
             var del = document.createElement("button");
             del.classList.add("delete");
             var delete_icon = document.createElement("i");
@@ -546,13 +513,37 @@
 
           }
 
-          #set_content(){
+          ////////////////////////////////////////////
+          ////////////////////////////////////////////
+          #set_content() {
             var matn = document.createElement("p");
             matn.classList.add("matn");
             matn.style.cursor = "text";
             matn.style.width = "fit-content";
             matn.style.marginBottom = "7px";
+            var messageLen = this.content.length;
+            console.log(messageLen);
             matn.innerHTML = this.content;
+            if (messageLen > 60) {
+              let messageArr = [];
+              for (let i = 0; i != messageLen; i++) messageArr[i] = this.content[i];
+              for (let i = 1; i <= messageLen + 1; i++) {
+                if (messageArr[i] == ' ' && i % 60 == 0) {
+                  messageArr.splice(i, 0, "<br />");
+                  i++;
+                } else if (messageArr[i] != ' ' && i % 60 == 0) {
+                  while (messageArr[i] != ' ') {
+                    i++;
+                    if (messageArr[i] == ' ') {
+                      messageArr.splice(i, 0, "<br />");
+                      break;
+                    }
+                  }
+                }
+              }
+              console.log(messageArr);
+              matn.innerHTML = messageArr.join('');
+            }
             return matn;
           }
 
@@ -577,10 +568,7 @@
             let matn = this.#set_content();
             let date = this.#set_date();
             data_div.appendChild(name);
-            // data_div.classList.add("dropdown-toggle");
             data_div.style.whiteSpace = "nowrap";
-            data_div.style.overflow = "scroll";
-
             if (this.replystatus) {
               var repDiv = document.createElement("div");
               repDiv.style.padding = "5px";
