@@ -281,7 +281,7 @@
       const roomName = JSON.parse(document.getElementById('room-name').textContent);
       document.getElementById("name").innerHTML = roomName;
 
-      var isreply = false, from_id, messages_div_List=[], messages_data_List=[], num;
+      var isreply = false, from_id, messages_div_List = [], messages_data_List = [], num;
       var username={{ username }};
 
       const chatSocket = new ReconnectingWebSocket(
@@ -303,7 +303,7 @@
         const data = JSON.parse(e.data);
         if (data["command"] === "fetch_message") {
           num = data["message"].length;
-          for(let i = data["message"].length-1; i >= 0; i--){
+          for(let i = data["message"].length-1; i >= 0; i--) {
             content = data["message"][i];
             message = new Message(content, username, num);
             let data_div = message.create_message();
@@ -356,8 +356,8 @@
           message_setting.style.boxShadow = "-2px 2px 10px black";
           message_setting.style.position = "relative";
           message_setting.style.float = "left";
-          message_setting.style.zIndex = 1000;
           message_setting.style.direction = "ltr";
+          message_setting.style.minWidth = "60px";
           this.message_setting = message_setting;
           return message_setting;
         }
@@ -571,7 +571,7 @@
           data_div.appendChild(matn);
           data_div.appendChild(date);
           data_div.style.maxWidth = "500px";
-          data_div.style.minWidth = "100px";
+          data_div.style.minWidth = "130px";
           if (this.author == username) {
             data_div.classList.add("person1");
             data_div.style.marginLeft = "auto";

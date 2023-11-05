@@ -203,3 +203,14 @@ li {
     height: 14%;
     cursor: text;
 }
+
+.setting {
+    background-color: white;
+    padding: 5px;
+    border-radius: 10px;
+    box-shadow: "-2px 2px 10px black";
+    position: relative;
+    float: left;
+    direction: ltr;
+    min-width: 60px;
+}
