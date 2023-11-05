@@ -524,14 +524,15 @@
             var messageLen = this.content.length;
             console.log(messageLen);
             matn.innerHTML = this.content;
-            if (messageLen > 60) {
+            var maxLen = 65;
+            if (messageLen > maxLen) {
               let messageArr = [];
               for (let i = 0; i != messageLen; i++) messageArr[i] = this.content[i];
               for (let i = 1; i <= messageLen + 1; i++) {
-                if (messageArr[i] == ' ' && i % 60 == 0) {
+                if (messageArr[i] == ' ' && i % maxLen == 0) {
                   messageArr.splice(i, 0, "<br />");
                   i++;
-                } else if (messageArr[i] != ' ' && i % 60 == 0) {
+                } else if (messageArr[i] != ' ' && i % maxLen == 0) {
                   while (messageArr[i] != ' ') {
                     i++;
                     if (messageArr[i] == ' ') {
@@ -541,7 +542,7 @@
                   }
                 }
               }
-              console.log(messageArr);
+              // console.log(messageArr);
               matn.innerHTML = messageArr.join('');
             }
             return matn;
