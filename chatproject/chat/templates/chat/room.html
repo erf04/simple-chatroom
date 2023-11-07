@@ -6,10 +6,10 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Chat Room</title>
+    <!-- integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" -->
     <link
       href="{% static 'bootstrap.min_2.css' %}"
       rel="stylesheet"
-      integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9"
       crossorigin="anonymous"
     />
     <link rel="stylesheet" href="{% static 'style.css' %}" />
@@ -52,7 +52,7 @@
             id="profile"
           >
             <img
-              style="width: 60px; height: 60px"
+              style="width: 100%; height: 100%"
               class="rounded-circle"
               src="{% static 'unknown.jpg' %}"
               id="img-prof"
@@ -60,11 +60,13 @@
           </div>
           <!-- info -->
           <div class="col-auto p-0 me-auto" id="info">
-            <div class="h3" id="name">Room name</div>
+            <!-- <div id="name"> -->
+            <h2 id="name">Room name</h2>
+            <!-- </div> -->
             {% if member_count == 1 %}
-            <div class="display6" id="members">1 member</div>
+            <div id="members"><h6>1 member</h6></div>
             {% else %}
-            <div class="display6" id="members">{{member_count}} members</div>
+            <div id="members">{{member_count}} members</div>
             {% endif %}
           </div>
           <!-- menu -->
@@ -92,11 +94,22 @@
             <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
               <li>
                 <a class="dropdown-item" id="clear_chat" style="cursor: pointer"
-                  >clear chat</a
+                  ><p class="m-0 p-0" style="font-size: 1vm">clear chat</p></a
                 >
               </li>
-              <li><a class="dropdown-item" href="#">Another action</a></li>
-              <li><a class="dropdown-item" href="#">Something else here</a></li>
+              <li>
+                <a
+                  class="dropdown-item"
+                  id="change-theme"
+                  onclick="changeTheme()"
+                  ><p class="m-0 p-0" style="font-size: 1vm">change theme</p></a
+                >
+              </li>
+              <li>
+                <a class="dropdown-item" href="#"
+                  ><p class="m-0 p-0" style="font-size: 1vm">sagi 3</p></a
+                >
+              </li>
             </ul>
           </div>
         </div>
@@ -141,7 +154,7 @@
                 />
               </svg> -->
               <img
-                style="width: 40px; height: 40px"
+                style="width: 100%; height: 100%"
                 src="{% static 'icons8-face-48.png' %}"
               />
             </button>
@@ -229,23 +242,27 @@
                 style="font-size: 30px; transform: scaleX(-1)"
                 id="file-btn"
               ></i> -->
-              <img src="{% static 'icons8-paperclip-48.png' %}" id="file-btn" />
+              <img
+                style="width: 80%; height: 80%; margin-top: 5px"
+                src="{% static 'icons8-paperclip-48.png' %}"
+                id="file-btn"
+              />
               <input type="file" />
             </label>
           </div>
           <!-- send button -->
           <div class="col-1 p-0 m-0" id="send-sagi">
-            <button class="border-0 p-0 m-0" id="chat-message-submit">
+            <button
+              style="border-radius: 100px"
+              class="border-0 p-0 m-0"
+              id="chat-message-submit"
+            >
               <!-- <i
                 class="fa fa-microphone"
                 style="font-size: 30px; transform: rotateY('angle')"
                 id="send"
               ></i> -->
-              <img
-                style="height: 40px; width: 40px"
-                src="{% static 'icons8-microphone-48.png' %}"
-                id="send"
-              />
+              <img src="{% static 'icons8-microphone-48.png' %}" id="send" />
             </button>
           </div>
         </div>
@@ -256,9 +273,9 @@
       integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm"
       crossorigin="anonymous"
     ></script> -->
+    <!-- integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" -->
     <script
       src="{% static 'bootstrap.bundle.min.js' %}"
-      integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm"
       crossorigin="anonymous"
     ></script>
     <!-- <script src="{% static '3a2eaf6206.js' %}"></script> -->
@@ -527,7 +544,7 @@
           date.style.cursor = "default";
           date.style.color = "gray";
           date.style.margin = "0px";
-          date.style.fontSize = "12px";
+          date.style.fontSize = "0.33cm";
           if (this.replystatus) date.innerHTML = this.time + "  replied";
           else date.innerHTML = this.time + "  not replied";
           return date;
@@ -607,6 +624,7 @@
         }
       }
 
+
       var input = document.getElementById("chat-message-input");
       var text = input.value;
       var members = document.getElementById("members");
@@ -617,6 +635,18 @@
           text = input.value;
         } else if (text === input.value || text === "") members.innerHTML = innerMembers;
       }, 500);
+
+      var theme = document.getElementById("change-theme");
+      var footer = document.getElementById("footer");
+      var emoji = document.getElementById("emoji");
+      var submit = document.getElementById("chat-message-submit");
+      function changeTheme() {
+        footer.style.backgroundColor = "#555";
+        input.style.backgroundColor = "#888";
+        emoji.style.backgroundColor = "#555";
+        submit.style.backgroundColor = "#555";
+        chat.style.backgroundColor = "rgb(40, 40, 40)";
+      }
 
       function messageDir(element) {
         let char = new RegExp("[\u0600-\u06FF]");
@@ -672,12 +702,16 @@
       setInterval(() => {
         if (input.value !== "") {
           send.setAttribute("src", "{% static 'icons8-send-30.png' %}");
-          send.style.width = "30px";
-          send.style.height = "30px";
+          // send.style.width = "30px";
+          // send.style.height = "30px";
+          send.style.width = "100%";
+          send.style.height = "100%";
         } else {
           send.setAttribute("src", "{% static 'icons8-microphone-48.png' %}");
-          send.style.height = "40px";
-          send.style.width = "40px";
+          // send.style.width = "40px";
+          // send.style.height = "40px";
+          send.style.width = "90%";
+          send.style.height = "90%";
         }
       }, 1);
 
