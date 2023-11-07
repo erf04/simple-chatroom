@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Chat Room</title>
     <link
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css"
+      href="{% static 'bootstrap.min_2.css' %}"
       rel="stylesheet"
       integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9"
       crossorigin="anonymous"
@@ -88,13 +88,6 @@
                 />
               </svg>
             </button>
-            <!-- <button
-              class="btn btn-dark dropdown-toggle border-0"
-              type="button"
-              id="dropdownMenuButton1"
-              data-bs-toggle="dropdown"
-              aria-expanded="false"
-            ></button> -->
             <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
               <li>
                 <a class="dropdown-item" id="clear_chat" style="cursor: pointer"
@@ -107,16 +100,12 @@
           </div>
         </div>
         <!-- chat part -->
-        <!-- <div class="bg-dark d-block" id="chat-log"></div> -->
-        <div class="d-block" id="chat-log">
-          <!-- <audio src="" id="voice" controls style="display: none"></audio> -->
-        </div>
+        <div class="d-block" id="chat-log"></div>
         <div
           class="alert alert-info alert-dismissible fade show"
           id="show-reply"
           style="display: none; margin-bottom: 0; padding: 8px"
         >
-          lsfnlsnflmnl
           <button
             type="button"
             class="close"
@@ -214,7 +203,7 @@
           <!-- message box -->
           <div class="col-9 p-1 m-0">
             <input
-              class="p-1 me-auto w-100 border-0 form-control"
+              class="me-auto w-100 border-0 form-control"
               type="text"
               placeholder="Type your message..."
               onmousedown="findType(this)"
@@ -246,31 +235,25 @@
                 style="font-size: 30px; transform: rotateY('angle')"
                 id="send"
               ></i>
-              <!-- <svg
-                xmlns="send.svg"
-                width="25"
-                height="25"
-                viewBox="0 0 16 16"
-                id="send"
-              >
-                <path
-                  d="M15.854.146a.5.5 0 0 1 .11.54l-5.819 14.547a.75.75 0 0 1-1.329.124l-3.178-4.995L.643 7.184a.75.75 0 0 1 .124-1.33L15.314.037a.5.5 0 0 1 .54.11ZM6.636 10.07l2.761 4.338L14.13 2.576 6.636 10.07Zm6.787-8.201L1.591 6.602l4.339 2.76 7.494-7.493Z"
-                />
-              </svg> -->
             </button>
           </div>
         </div>
       </div>
     </div>
-    <script
+    <!-- <script
       src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"
       integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm"
       crossorigin="anonymous"
+    ></script> -->
+    <script
+      src="{% static 'bootstrap.bundle.min.js' %}"
+      integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm"
+      crossorigin="anonymous"
     ></script>
-
-    <script src="{% static '3a2eaf6206.js' %}"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <!-- <script src="{% static '3a2eaf6206.js' %}"></script> -->
+    <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script> -->
+    <script src="{% static 'jquery.min.js' %}"></script>
+    <!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script> -->
     <script src="{% static 'reconnecting-websocket.min.js' %}"></script>
     <script src="{% static 'script.js' %}"></script>
     {{ room_name|json_script:"room-name" }}
@@ -321,7 +304,7 @@
       }
 
       document.getElementById("clear_chat").addEventListener("click", () => {
-      window.location.pathname = "/chat/clear_chat/" + roomName + "/";});
+      window.location.pathname = "/chat/clear_chat/" + roomName + "/"});
 
       class Message {
         constructor(data, username, n) {
@@ -398,7 +381,7 @@
             messageDir(showReply);
             isreply = true;
             from_id = id;
-            $('#chat-message-input').focus();
+            document.getElementById("chat-message-input").focus();
             $("#chat-message-submit").click(() => {$("#show-reply").hide()});
           });
         }
@@ -503,7 +486,6 @@
           matn.style.width = "fit-content";
           matn.style.marginBottom = "7px";
           var messageLen = this.content.length;
-          console.log(messageLen);
           matn.innerHTML = this.content;
           var maxLen = 65;
           if (messageLen > maxLen) {
@@ -584,6 +566,7 @@
             matn.style.paddingRight = "15px";
             date.style.textAlign = "right";
           }
+
           // create setting and add options
           this.#set_setting();
           this.#set_reply_option();
@@ -592,15 +575,22 @@
           this.#set_speak_option();
           this.#set_edit_option();
           data_div.appendChild(this.message_setting);
-          const content_menu=this.message_setting;
+          var content_menu = this.message_setting;
           content_menu.style.display = "none";
           messageDir(matn);
 
+          var once = true;
           data_div.addEventListener("contextmenu", () => {
-            var chat = document.getElementById("chat-log");
+            chat.style.opacity = "0.4";
+            content_menu.style.opacity = "1";
+            // chat.style.backgroundColor = "#ffffff57";
             content_menu.style.display = "block";
             content_menu.scrollIntoView({ behavior: 'smooth', block: 'center' });
-            chat.onclick = () => {content_menu.style.display = "none";}
+            chat.onclick = () => {
+              content_menu.style.display = "none";
+              chat.style.opacity = "1";
+              // chat.style.backgroundColor = "#ffffffd0";
+            }
           });
           return data_div;
         }
