@@ -111,8 +111,9 @@ ul {
 
 #footer {
     /* background-color: #555; */
-    background-color: #ffffffd0;
-    height: 8%;
+    /* background-color: #ffffffd0; */
+    background-color: white;
+    /* height: 8%; */
     border-radius: 0px 0px 20px 20px;
 }
 
@@ -137,9 +138,14 @@ ul {
     text-align: center;
 }
 
+#send {
+    width: 20px;
+    height: 20px;
+}
+
 #file-btn {
-    height: 25px;
-    width: 25px;
+    height: 35px;
+    width: 35px;
     margin-bottom: 5px;
 }
 
@@ -168,7 +174,7 @@ li {
     margin: 0;
 }
 
-.h-90 {
+/* .h-90 {
     height: 90%;
 }
 
@@ -203,7 +209,7 @@ li {
 .h-14 {
     height: 14%;
     cursor: text;
-}
+} */
 
 .setting {
     background-color: white;
