@@ -18,7 +18,7 @@ This is a simple yet powerful chat application built using Django for the backen
 1.Clone the repository:
 ```
 git clone [https://github.com//simple-chatroom.git](https://github.com/lead-team/simple-chatroom.git)
-cd simple-chatroom
+cd simple-chatroom/chatproject
 ```
 2.Install dependencies:
 ```
